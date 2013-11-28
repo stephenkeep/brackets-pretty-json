@@ -1,0 +1,12 @@
+{
+    "name": "PrettyJson",
+    "title": "Pretty Json",
+    "description": "Make Your Json Pretty",
+    "homepage": "https://github.com/stephenkeep/brackets-pretty-json",
+    "version": "0.0.1",
+    "author": "Stephen Keep <stephenkeep@gmail.com> (https://github.com/stephenkeep/)",
+    "license": "MIT",
+    "engines": {
+        "brackets": ">=0.24.0"
+    }
+}
