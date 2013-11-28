@@ -40,9 +40,7 @@ define(function (require, exports, module) {
                 } else {
                     doc.setText(formattedText);
                 }
-    
-                //editor.setCursorPos(cursor);
-                //editor.setScrollPos(scroll.x, scroll.y);
+
             });
         }
     }
