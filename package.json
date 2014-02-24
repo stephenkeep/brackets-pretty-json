@@ -1,12 +1,19 @@
 {
-    "name": "pretty_json",
-    "title": "Pretty Json",
-    "description": "Make Your Json Pretty, turn a single line of json into multiple lines with ctrl+shift+P",
-    "homepage": "https://github.com/stephenkeep/brackets-pretty-json",
-    "version": "0.0.2",
-    "author": "Stephen Keep <stephenkeep@gmail.com> (https://github.com/stephenkeep/)",
-    "license": "MIT",
-    "engines": {
-        "brackets": ">=0.24.0"
-    }
+	"name": "pretty_json",
+	"title": "Pretty Json",
+	"description": "Make Your Json Pretty, turn a single line of json into multiple lines with ctrl+shift+J",
+	"homepage": "https://github.com/stephenkeep/brackets-pretty-json",
+	"version": "0.0.3",
+	"contributors": [
+		{
+			"name": "Daniel Stanoescu",
+			"url": "https://github.com/inquire",
+			"email": "stanoescu.dan@gmail.com"
+		}
+	],
+	"author": "Stephen Keep <stephenkeep@gmail.com> (https://github.com/stephenkeep/)",
+	"license": "MIT",
+	"engines": {
+		"brackets": ">=0.24.0"
+	}
 }
