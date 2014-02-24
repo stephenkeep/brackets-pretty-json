@@ -53,7 +53,8 @@ define(function (require, exports, module) {
     // Then create a menu item bound to the command
     // The label of the menu item is the name we gave the command (see above)
     var menu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
-    menu.addMenuItem(MY_COMMAND_ID, "Ctrl-Shift-P");
+    // we use J here because P conficts with pep8 checker.
+    menu.addMenuItem(MY_COMMAND_ID, "Ctrl-Shift-J");
 
     exports.prettyJson = prettyJson;
 });
