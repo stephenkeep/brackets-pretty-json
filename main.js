@@ -27,8 +27,13 @@ define(function (require, exports, module) {
             } else {
                 unformattedText = DocumentManager.getCurrentDocument().getText();
             }
-            
-            var obj = JSON.parse(unformattedText);
+            var obj;
+            try {
+                obj = JSON.parse(unformattedText);
+            } catch (e) {
+                alert('Invalid JSON! Please check it');
+                return;
+            }
             var formattedText = JSON.stringify(obj, null, "\t");
             
             var doc = DocumentManager.getCurrentDocument();
