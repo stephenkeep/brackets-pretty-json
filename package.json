@@ -3,12 +3,17 @@
 	"title": "Pretty Json",
 	"description": "Make Your Json Pretty, turn a single line of json into multiple lines with ctrl+shift+J",
 	"homepage": "https://github.com/stephenkeep/brackets-pretty-json",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"contributors": [
 		{
 			"name": "Daniel Stanoescu",
 			"url": "https://github.com/inquire",
 			"email": "stanoescu.dan@gmail.com"
+		},
+        {
+			"name": "Francisco Memoli",
+			"url": "https://github.com/franciscomemoli",
+			"email": ""
 		}
 	],
 	"author": "Stephen Keep <stephenkeep@gmail.com> (https://github.com/stephenkeep/)",
