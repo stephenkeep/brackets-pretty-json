@@ -1,16 +1,16 @@
 {
 	"name": "pretty_json",
-	"title": "Pretty Json",
-	"description": "Make Your Json Pretty, turn a single line of json into multiple lines with ctrl+shift+J",
+	"title": "Pretty Json Lint",
+	"description": "Make Your Json Pretty and Linted, turn a single line of json into multiple lines with ctrl+shift+J",
 	"homepage": "https://github.com/stephenkeep/brackets-pretty-json",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"contributors": [
 		{
 			"name": "Daniel Stanoescu",
 			"url": "https://github.com/inquire",
 			"email": "stanoescu.dan@gmail.com"
 		},
-        {
+		{
 			"name": "Francisco Memoli",
 			"url": "https://github.com/franciscomemoli",
 			"email": ""

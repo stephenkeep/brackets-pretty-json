@@ -4,11 +4,14 @@
 /** Simple extension that adds a "File > Hello World" menu item. Inserts "Hello, world!" at cursor pos. */
 define(function (require, exports, module) {
     "use strict";
+    
+    require("thirdparty/jsonlint/jsonlint");
 
     var CommandManager = brackets.getModule("command/CommandManager"),
         EditorManager  = brackets.getModule("editor/EditorManager"),
         DocumentManager = brackets.getModule("document/DocumentManager"),
-        Menus          = brackets.getModule("command/Menus");
+        Menus          = brackets.getModule("command/Menus"),
+        CodeInspection = brackets.getModule("language/CodeInspection");
 
     
     // Function to run when the menu item is clicked
@@ -31,7 +34,22 @@ define(function (require, exports, module) {
             try {
                 obj = JSON.parse(unformattedText);
             } catch (e) {
-                alert('Invalid JSON! Please check it');
+                
+                try {
+                    jsonlint.parse(unformattedText);
+                } catch (err) {
+                    
+                    var parts = err.message.split('\n'),
+                       re = /(\d+)/,
+                       line = re.exec(parts[0]);
+
+                    if (line) {
+                        line = line[0];
+                        var ch = parts[2].length - 1;
+
+                        alert("line " + line + ", column " + ch);
+                    }
+                }
                 return;
             }
             var formattedText = JSON.stringify(obj, null, "\t");
@@ -50,6 +68,35 @@ define(function (require, exports, module) {
         }
     }
     
+    function lintFile(text, fullPath) {
+        try {
+            jsonlint.parse(text);
+        } catch (e) {
+            var parts = e.message.split('\n'),
+                re = /(\d+)/,
+                line = re.exec(parts[0]);
+
+            if (line) {
+                line = line[0];
+                var ch = parts[2].length - 1;
+                var error = { 
+                    pos:     {line: line - 1, ch: ch},
+                    message: "line " + line + ", column " + ch + ":",
+                    type:    CodeInspection.Type.ERROR
+                };
+
+                return {errors: [error]};
+            }
+        }
+
+        return null;
+    }
+
+    // Register for JSON files
+    CodeInspection.register("json", {
+        name: "PrettyJson",
+        scanFile: lintFile
+    });
     
     // First, register a command - a UI-less object associating an id to a handler
     var MY_COMMAND_ID = "PrettyJson.MakePrettyJson";   // package-style naming to avoid collisions
