@@ -11,6 +11,6 @@ Install brackets http://brackets.io
 Contributors
 ====================
 
-Daniel Stanoescu: https://github.com/inquire
-Francisco Memoli: https://github.com/franciscomemoli
-Simon Wood: https://github.com/hpoom
+Daniel Stanoescu: https://github.com/inquire <br/>
+Francisco Memoli: https://github.com/franciscomemoli <br/>
+Simon Wood: https://github.com/hpoom <br/>
