@@ -13,3 +13,4 @@ Contributors
 
 Daniel Stanoescu: https://github.com/inquire
 Francisco Memoli: https://github.com/franciscomemoli
+Simon Wood: https://github.com/hpoom
