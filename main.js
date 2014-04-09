@@ -53,7 +53,7 @@ define(function (require, exports, module) {
                 return;
             }
             // Format JSON based on the current editor settings
-            var formattedText = JSON.stringify(obj, null, (PreferencesManager.get("useTabChar")?"\t":PreferencesManager.get("spaceUnits"));
+            var formattedText = JSON.stringify(obj, null, (PreferencesManager.get("useTabChar")?"\t":PreferencesManager.get("spaceUnits")));
             
             var doc = DocumentManager.getCurrentDocument();
             
@@ -101,7 +101,7 @@ define(function (require, exports, module) {
     
     // First, register a command - a UI-less object associating an id to a handler
     var MY_COMMAND_ID = "PrettyJson.MakePrettyJson";   // package-style naming to avoid collisions
-    CommandManager.register("JSON Formatter", MY_COMMAND_ID, prettyJson);
+    CommandManager.register("Pretty Json", MY_COMMAND_ID, prettyJson);
 
     // Then create a menu item bound to the command
     // The label of the menu item is the name we gave the command (see above)

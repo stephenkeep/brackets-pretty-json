@@ -1,24 +1,30 @@
 {
-	"name": "pretty_json",
-	"title": "Pretty Json",
-	"description": "Make Your Json Pretty and Linted, turn a single line of json into multiple lines with ctrl+shift+J",
-	"homepage": "https://github.com/stephenkeep/brackets-pretty-json",
-	"version": "0.1.1",
-	"contributors": [
-		{
-			"name": "Daniel Stanoescu",
-			"url": "https://github.com/inquire",
-			"email": "stanoescu.dan@gmail.com"
-		},
-		{
-			"name": "Francisco Memoli",
-			"url": "https://github.com/franciscomemoli",
-			"email": ""
-		}
-	],
-	"author": "Stephen Keep <stephenkeep@gmail.com> (https://github.com/stephenkeep/)",
-	"license": "MIT",
-	"engines": {
-		"brackets": ">=0.24.0"
-	}
+    "name": "pretty_json",
+    "title": "Pretty Json",
+    "description": "Make Your Json Pretty and Linted, turn a single line of json into multiple lines with ctrl+shift+J",
+    "homepage": "https://github.com/stephenkeep/brackets-pretty-json",
+    "version": "0.1.2",
+    "contributors": [
+        {
+            "name": "Daniel Stanoescu",
+            "url": "https://github.com/inquire",
+            "email": "stanoescu.dan@gmail.com"
+        },
+        {
+            "name": "Francisco Memoli",
+            "url": "https://github.com/franciscomemoli",
+            "email": ""
+        },
+        {
+            "name": "Simon Wood",
+            "url": "https://github.com/hpoom",
+            "email": ""
+        }
+        
+    ],
+    "author": "Stephen Keep <stephenkeep@gmail.com> (https://github.com/stephenkeep/)",
+    "license": "MIT",
+    "engines": {
+        "brackets": ">=0.24.0"
+    }
 }
