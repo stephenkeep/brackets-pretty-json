@@ -1,10 +1,10 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
-/*global define, $, brackets */
+/*global define, $, brackets, window */
 
 /** Simple extension that adds a "File > Hello World" menu item. Inserts "Hello, world!" at cursor pos. */
 define(function (require, exports, module) {
     "use strict";
-    
+
     require("thirdparty/jsonlint/jsonlint");
 
     var CommandManager = brackets.getModule("command/CommandManager"),
@@ -13,6 +13,38 @@ define(function (require, exports, module) {
         Menus          = brackets.getModule("command/Menus"),
         CodeInspection = brackets.getModule("language/CodeInspection"),
         PreferencesManager = brackets.getModule("preferences/PreferencesManager");
+
+    var jsonlint = window.jsonlint;
+
+    jsonlint.parseError = jsonlint.lexer.parseError = function (str, hash) {
+        var err = new Error(str);
+        err.line = hash.loc.first_line;
+        err.col = hash.loc.last_column;
+        err.token = hash.token;
+        err.expected = hash.expected;
+        throw err;
+    };
+
+    function jsonText(text) {
+        try {
+            jsonlint.parse(text);
+        } catch (e) {
+            var message = "Expecting: " + e.expected.join(", ") + ". Found: '" + e.token + "'.";
+            var error = {
+                pos: {
+                    line: e.line,
+                    ch: e.col
+                },
+                message: message,
+                type: CodeInspection.Type.ERROR,
+                e: e // Used only to track the original exception
+            };
+
+            return error;
+        }
+
+        return null;
+    }
 
     // Function to run when the menu item is clicked
     function prettyJson() {
@@ -34,26 +66,14 @@ define(function (require, exports, module) {
             try {
                 obj = JSON.parse(unformattedText);
             } catch (e) {
-                
-                try {
-                    jsonlint.parse(unformattedText);
-                } catch (err) {
-                    
-                    var parts = err.message.split('\n'),
-                       re = /(\d+)/,
-                       line = re.exec(parts[0]);
-
-                    if (line) {
-                        line = line[0];
-                        var ch = parts[2].length - 1;
-
-                        alert("line " + line + ", column " + ch);
-                    }
+                var error = jsonText(unformattedText);
+                if (error) {
+                    window.alert(error.message + "\nline " + error.pos.line + ", column " + error.pos.ch);
                 }
                 return;
             }
             // Format JSON based on the current editor settings
-            var formattedText = JSON.stringify(obj, null, (PreferencesManager.get("useTabChar")?"\t":PreferencesManager.get("spaceUnits")));
+            var formattedText = JSON.stringify(obj, null, (PreferencesManager.get("useTabChar") ? "\t" : PreferencesManager.get("spaceUnits")));
             
             var doc = DocumentManager.getCurrentDocument();
             
@@ -70,24 +90,10 @@ define(function (require, exports, module) {
     }
     
     function lintFile(text, fullPath) {
-        try {
-            jsonlint.parse(text);
-        } catch (e) {
-            var parts = e.message.split('\n'),
-                re = /(\d+)/,
-                line = re.exec(parts[0]);
-
-            if (line) {
-                line = line[0];
-                var ch = parts[2].length - 1;
-                var error = { 
-                    pos:     {line: line - 1, ch: ch},
-                    message: "line " + line + ", column " + ch + ":",
-                    type:    CodeInspection.Type.ERROR
-                };
-
-                return {errors: [error]};
-            }
+        var error = jsonText(text);
+        if (error) {
+            error.pos.line--;
+            return { errors: [error] };
         }
 
         return null;
